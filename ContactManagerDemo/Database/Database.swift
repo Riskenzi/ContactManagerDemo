@@ -20,9 +20,15 @@ class Database {
         case showAllItems = "Log : All Items -> ⚡️"
     }
     
+    enum Result<T,E:Error> {
+        case success(T)
+        case failture(E)
+    }
+    
     
     static let shared = Database()
     private var database: Connection!
+    private let alertService = AlertService()
     
     private let contactTable = Table("contacts")
     private let id = Expression<Int>("id")
@@ -31,7 +37,9 @@ class Database {
     private let photoUrl  = Expression<String>("photoUrl")
     private let email  = Expression<String>("email")
     
-  
+    typealias deleteCompletion = ((_ isSuccess: Result<Bool,DatabaseError>)->(Void))
+    typealias updateCompletion = ((_ isSuccess: Result<Bool,DatabaseError>)->(Void))
+    typealias clearCompletion = ((_ isSuccess: Result<Bool,DatabaseError>)->(Void))
     
     private init(){
         do {
@@ -42,7 +50,8 @@ class Database {
             print(Log.initDatabase.rawValue)
             createTableContants()
         }catch{
-            print(error.localizedDescription,"⚠️")
+            print(DatabaseError.invalidLoadDatabase.errorDescription!,"⚠️")
+            
         }
        
     }
@@ -60,7 +69,7 @@ class Database {
             try self.database.run(createTable)
             print(Log.createTable.rawValue)
         } catch  {
-            print(error.localizedDescription,"⚠️")
+            print(DatabaseError.invalidTable.errorDescription!,"⚠️")
         }
     }
     
@@ -94,45 +103,41 @@ class Database {
         } catch {
             print(error.localizedDescription)
         }
-        //print(Log.showAllItems.rawValue,contactsData)
         return contactsData
     }
     
-    public func getContactByID(_ idItem : Int) -> ContactModel? {
-        var contactData : ContactModel?
+    public func updateContact(_ data: ContactModel?,completion: @escaping updateCompletion) {
+        guard let id = data?.id, let firstName = data?.firstName, let lastName = data?.lastName, let email = data?.email else { return }
+        let contact = self.contactTable.filter(self.id == id)
+        let updateContact = contact.update(self.email <- email, self.lastName <- lastName, self.firstName <- firstName)
         do {
-            
-            let foundItem = contactTable.filter(id == idItem)
-            let results = try self.database.prepare(foundItem)
-            for result in results {
-                contactData = ContactModel(firstName: result[self.firstName], lastName: result[self.lastName], photoURL: result[self.photoUrl], email: result[self.email], result[self.id])
-            }
-        } catch  {
-           print(error.localizedDescription)
+            try self.database.run(updateContact)
+            completion(.success(true))
+        } catch {
+            completion(.failture(.invalidUpdate))
         }
-        //print(Log.contactByID,contactData ?? nil)
-        return contactData
+        
     }
     
-    public func deleteContact(_ idItem : Int) -> Void {
+    public func deleteContact(_ idItem : Int,completion: @escaping deleteCompletion) {
         let contact = self.contactTable.filter(self.id == idItem)
         let delete = contact.delete()
         do {
             try self.database.run(delete)
-            print(Log.delete.rawValue)
+            completion(.success(true))
         } catch {
-            print(error.localizedDescription)
+            completion(.failture(.invalidDeleting))
         }
     }
     
-    public func clearContacts() -> Void {
+    public func clearContacts(completion: @escaping clearCompletion) -> Void {
         let contacts = self.contactTable.delete()
         do {
             try self.database.run(contacts)
-            print(Log.deleteAll.rawValue)
             createTableContants()
+            completion(.success(true))
         } catch {
-            print(error.localizedDescription)
+            completion(.failture(.invalidClearing))
         }
     }
     
@@ -140,3 +145,17 @@ class Database {
 
 
 
+enum DatabaseError : String,Error {
+    case invalidLoadDatabase = "Database not created"
+    case invalidTable = "Table not created"
+    case invalidCreateItem = "Item adding failed"
+    case invalidGetAllContent = "Error loading all items from database"
+    case invalidUpdate = "Update item failed"
+    case invalidDeleting = "Deleting failed"
+    case invalidClearing = "Clearing failed"
+}
+
+
+extension DatabaseError : LocalizedError {
+    var errorDescription: String? {return NSLocalizedString(rawValue, comment: "")}
+}

@@ -46,24 +46,31 @@ class MainDataSource: NSObject {
     }
     
     private func featchContact() {
-        Networking.shared.getContactsHandler { [weak self] result in
-            switch result {
-            case .success(let contacts) :
-                self?.connection.clearContacts()
-                contacts.results?.forEach({ (contact) in
-                    
-                    guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.thumbnail, let email = contact.email else {
-                        return
+        self.connection.clearContacts(completion: { (resultData) -> (Void) in
+            switch resultData {
+            case .success(_):
+                
+                Networking.shared.getContactsHandler { [weak self] result in
+                    switch result {
+                    case .success(let contacts):
+                        contacts.results?.forEach({ (contact) in
+                            guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.thumbnail, let email = contact.email else {
+                                return
+                            }
+                            let newContact = ContactModel(firstName: fName, lastName: lName, photoURL: photoUrl, email: email)
+                            self?.connection.addContatToDatabase(data: newContact)
+                            
+                        })
+                        self?.reloadContainers()
+                    case .failture(let error):
+                        self?.alertService.alert(error.localizedDescription)
                     }
-                    let newContact = ContactModel(firstName: fName, lastName: lName, photoURL: photoUrl, email: email)
-                    self?.connection.addContatToDatabase(data: newContact)
-                   
-                })
-                self?.reloadContainers()
-            case .failture(let error) :
-                self?.alertService.alert(error.localizedDescription)
+                }
+                
+            case .failture(let error):
+                self.alertService.alert(error.localizedDescription)
             }
-        }
+        })
     }
     
     private func setupRefresh() {
@@ -108,5 +115,24 @@ extension MainDataSource : UITableViewDelegate, UITableViewDataSource {
         Navigation.navigateFullScreen(in: navigation,data)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "DEL") { (action, view, bool) in
+            guard let data = self.contactsDB[indexPath.row].id else {
+                return
+            }
+            self.connection.deleteContact(data) { status -> (Void) in
+                switch status {
+                case .success(_) :
+                    self.reloadContainers()
+                case .failture(let error) : self.alertService.alert(error.localizedDescription)
+                }
+            }
+            
+        }
+        deleteAction.backgroundColor = UIColor.red
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
     
 }
