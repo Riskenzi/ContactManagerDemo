@@ -31,7 +31,7 @@ class MainDataSource: NSObject {
         self.controller = controller
         self.setupTable()
         self.setupRefresh()
-        self.featchContact()
+        self.prepareTableContentToDisplay()
     }
     
     private func setupTable() {
@@ -45,32 +45,34 @@ class MainDataSource: NSObject {
 
     }
     
-    private func featchContact() {
+    private func prepareTableContentToDisplay() {
         self.connection.clearContacts(completion: { (resultData) -> (Void) in
             switch resultData {
             case .success(_):
-                
-                Networking.shared.getContactsHandler { [weak self] result in
-                    switch result {
-                    case .success(let contacts):
-                        contacts.results?.forEach({ (contact) in
-                            guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.medium, let email = contact.email else {
-                                return
-                            }
-                            let newContact = ContactModel(firstName: fName, lastName: lName, photoURL: photoUrl, email: email)
-                            self?.connection.addContatToDatabase(data: newContact)
-                            
-                        })
-                        self?.reloadContainers()
-                    case .failture(let error):
-                        self?.alertService.alert(error.localizedDescription)
-                    }
-                }
-                
+                self.featchContacts()
             case .failture(let error):
                 self.alertService.alert(error.localizedDescription)
             }
         })
+    }
+    
+    private func featchContacts(){
+        Networking.shared.getContactsHandler { [weak self] result in
+            switch result {
+            case .success(let contacts):
+                contacts.results?.forEach({ (contact) in
+                    guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.medium, let email = contact.email else {
+                        return
+                    }
+                    let newContact = ContactModel(firstName: fName, lastName: lName, photoURL: photoUrl, email: email)
+                    self?.connection.addContatToDatabase(data: newContact)
+                    
+                })
+                self?.reloadContainers()
+            case .failture(let error):
+                self?.alertService.alert(error.localizedDescription)
+            }
+        }
     }
     
     private func setupRefresh() {
@@ -80,7 +82,7 @@ class MainDataSource: NSObject {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-      featchContact()
+      prepareTableContentToDisplay()
       refreshControl.endRefreshing()
     }
     

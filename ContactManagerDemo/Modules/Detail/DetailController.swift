@@ -22,14 +22,17 @@ class DetailController: BaseController {
         // Do any additional setup after loading the view.
     }
     
-
-    
     override func prepareViews() {
         super.prepareViews()
         initTableView()
-        
-//        hideKeyboardOnTap()
+        hideKeyboardOnTap()
     }
+    
+    override func setupObservers() {
+        super.setupObservers()
+        observeKeyboard()
+    }
+    
     func initTableView() -> Void {
         _ = self.delegate
     }

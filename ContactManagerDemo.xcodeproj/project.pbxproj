@@ -30,12 +30,13 @@
 		585FF59C254DC7DE00B07A7E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585FF59B254DC7DE00B07A7E /* DetailViewModel.swift */; };
 		585FF59F254DCCFE00B07A7E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585FF59E254DCCFE00B07A7E /* BaseCell.swift */; };
 		585FF5A3254DDF0E00B07A7E /* Notification + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585FF5A2254DDF0E00B07A7E /* Notification + Extensions.swift */; };
+		585FF5AF254DE96700B07A7E /* UIViewController + Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585FF5AE254DE96700B07A7E /* UIViewController + Keyboard.swift */; };
 		5883C144254CA9F300EB141A /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C142254CA9F300EB141A /* MainController.swift */; };
 		5883C145254CA9F300EB141A /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5883C143254CA9F300EB141A /* MainController.xib */; };
 		5883C149254D6B8000EB141A /* MainDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C148254D6B8000EB141A /* MainDataSource.swift */; };
 		5883C14E254D6D4400EB141A /* ContactViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C14C254D6D4400EB141A /* ContactViewCell.swift */; };
 		5883C14F254D6D4400EB141A /* ContactViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5883C14D254D6D4400EB141A /* ContactViewCell.xib */; };
-		5883C153254D70CC00EB141A /* GlovalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C152254D70CC00EB141A /* GlovalService.swift */; };
+		5883C153254D70CC00EB141A /* GlobalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C152254D70CC00EB141A /* GlobalService.swift */; };
 		5883C156254D710700EB141A /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C155254D710700EB141A /* Navigation.swift */; };
 		5883C159254D73B200EB141A /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C158254D73B200EB141A /* Identifiers.swift */; };
 		5883C15D254D744B00EB141A /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5883C15C254D744B00EB141A /* BaseController.swift */; };
@@ -139,12 +140,13 @@
 		585FF59B254DC7DE00B07A7E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		585FF59E254DCCFE00B07A7E /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		585FF5A2254DDF0E00B07A7E /* Notification + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification + Extensions.swift"; sourceTree = "<group>"; };
+		585FF5AE254DE96700B07A7E /* UIViewController + Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Keyboard.swift"; sourceTree = "<group>"; };
 		5883C142254CA9F300EB141A /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5883C143254CA9F300EB141A /* MainController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
 		5883C148254D6B8000EB141A /* MainDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataSource.swift; sourceTree = "<group>"; };
 		5883C14C254D6D4400EB141A /* ContactViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewCell.swift; sourceTree = "<group>"; };
 		5883C14D254D6D4400EB141A /* ContactViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactViewCell.xib; sourceTree = "<group>"; };
-		5883C152254D70CC00EB141A /* GlovalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlovalService.swift; sourceTree = "<group>"; };
+		5883C152254D70CC00EB141A /* GlobalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalService.swift; sourceTree = "<group>"; };
 		5883C155254D710700EB141A /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		5883C158254D73B200EB141A /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		5883C15C254D744B00EB141A /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				585FF5A2254DDF0E00B07A7E /* Notification + Extensions.swift */,
+				585FF5AE254DE96700B07A7E /* UIViewController + Keyboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -347,7 +350,7 @@
 				5883C15B254D743B00EB141A /* Support */,
 				58EF52F2254C837600B2A3C8 /* SuportUI */,
 				58EF52EE254C80DD00B2A3C8 /* AlertService.swift */,
-				5883C152254D70CC00EB141A /* GlovalService.swift */,
+				5883C152254D70CC00EB141A /* GlobalService.swift */,
 				5883C155254D710700EB141A /* Navigation.swift */,
 				5883C158254D73B200EB141A /* Identifiers.swift */,
 			);
@@ -535,7 +538,7 @@
 				5883C144254CA9F300EB141A /* MainController.swift in Sources */,
 				5883C159254D73B200EB141A /* Identifiers.swift in Sources */,
 				5883C161254DA91500EB141A /* DetailController.swift in Sources */,
-				5883C153254D70CC00EB141A /* GlovalService.swift in Sources */,
+				5883C153254D70CC00EB141A /* GlobalService.swift in Sources */,
 				580F9A23254B2D5600F565B9 /* Database.swift in Sources */,
 				5883C15D254D744B00EB141A /* BaseController.swift in Sources */,
 				585FF590254DC26300B07A7E /* AvatarCell.swift in Sources */,
@@ -548,6 +551,7 @@
 				58EF52EF254C80DD00B2A3C8 /* AlertService.swift in Sources */,
 				580F99AE254B2BE300F565B9 /* SceneDelegate.swift in Sources */,
 				5883C149254D6B8000EB141A /* MainDataSource.swift in Sources */,
+				585FF5AF254DE96700B07A7E /* UIViewController + Keyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +719,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGLJTNM8P9;
 				INFOPLIST_FILE = ContactManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,6 +739,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGLJTNM8P9;
 				INFOPLIST_FILE = ContactManagerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

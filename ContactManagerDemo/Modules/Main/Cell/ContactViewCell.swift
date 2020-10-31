@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContactViewCell: UITableViewCell {
+class ContactViewCell: BaseCell {
     
     static let kCell = UINib.idenXibTopicCell
 
@@ -36,6 +36,11 @@ class ContactViewCell: UITableViewCell {
         lastNameLb.text = data.lastName
         lastNameLb.sizeToFit()
         
+    }
+    
+    override func prepareViews() {
+        imageCell.layer.masksToBounds = true
+        imageCell.layer.cornerRadius = imageCell.bounds.size.height / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -17,12 +17,6 @@ class GlobalService: NSObject {
         }
         return false
     }
-    
-//    static func correctingImageURL(urlString: String) -> String {
-//        var imageUrl = urlString.replacingOccurrences(of: "amp;", with: "", options: NSString.CompareOptions.literal, range: nil)
-//        imageUrl = imageUrl.replacingOccurrences(of: "amp;s", with: "s", options: NSString.CompareOptions.literal, range: nil)
-//        return imageUrl
-//    }
 }
 extension UITableView {
     func registerCellFromNib(_ nameCell: String) -> Void{
