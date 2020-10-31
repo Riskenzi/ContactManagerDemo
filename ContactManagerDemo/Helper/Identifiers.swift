@@ -11,4 +11,7 @@ extension UINib {
     
     static public let idenXibTopicCell = "ContactViewCell"
     static public let detailController = "DetailController"
+    static public let TextFieldCell = "TextFieldCell"
+    static public let AvatarCell = "AvatarCell"
+    
 }

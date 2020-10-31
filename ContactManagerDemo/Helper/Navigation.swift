@@ -44,7 +44,10 @@ class Navigation: NSObject {
         DispatchQueue.main.async {
             let controller = DetailController(nibName: UINib.detailController, bundle: nil)
             controller.modalPresentationStyle = .fullScreen
-            controller.contactData = data
+            if let dataValid = data {
+                //controller.delegate.model = DetailViewModel(data: dataValid)
+                controller.model = DetailViewModel(data: dataValid)
+            }
             navigationController.show(controller, sender: nil)
         }
     }

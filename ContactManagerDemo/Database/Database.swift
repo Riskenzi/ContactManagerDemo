@@ -50,7 +50,7 @@ class Database {
             print(Log.initDatabase.rawValue)
             createTableContants()
         }catch{
-            print(DatabaseError.invalidLoadDatabase.errorDescription!,"⚠️")
+            print(DatabaseError.invalidLoadDatabase.errorDescription!)
             
         }
        
@@ -69,7 +69,7 @@ class Database {
             try self.database.run(createTable)
             print(Log.createTable.rawValue)
         } catch  {
-            print(DatabaseError.invalidTable.errorDescription!,"⚠️")
+            print(DatabaseError.invalidTable.errorDescription!)
         }
     }
     
@@ -146,13 +146,13 @@ class Database {
 
 
 enum DatabaseError : String,Error {
-    case invalidLoadDatabase = "Database not created"
-    case invalidTable = "Table not created"
-    case invalidCreateItem = "Item adding failed"
-    case invalidGetAllContent = "Error loading all items from database"
-    case invalidUpdate = "Update item failed"
-    case invalidDeleting = "Deleting failed"
-    case invalidClearing = "Clearing failed"
+    case invalidLoadDatabase = "⚠️Database not created ⚠️"
+    case invalidTable = "⚠️Table not created ⚠️"
+    case invalidCreateItem = "⚠️Item adding failed ⚠️"
+    case invalidGetAllContent = "⚠️Error loading all items from database⚠️"
+    case invalidUpdate = "⚠️Update item failed⚠️"
+    case invalidDeleting = "⚠️Deleting failed⚠️"
+    case invalidClearing = "⚠️Clearing failed⚠️"
 }
 
 

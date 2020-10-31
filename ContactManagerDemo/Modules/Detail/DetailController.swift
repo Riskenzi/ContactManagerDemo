@@ -7,13 +7,30 @@
 
 import UIKit
 
-class DetailController: UIViewController {
+class DetailController: BaseController {
 
-    lazy var contactData : ContactModel? = nil
+    
+    @IBOutlet weak var tableView: UITableView!
+    lazy var model: DetailViewModel? = nil
+    
+    lazy var delegate: DetailDataSource = {
+        return .init(self)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(contactData)
         // Do any additional setup after loading the view.
+    }
+    
+
+    
+    override func prepareViews() {
+        super.prepareViews()
+        initTableView()
+        
+//        hideKeyboardOnTap()
+    }
+    func initTableView() -> Void {
+        _ = self.delegate
     }
 }

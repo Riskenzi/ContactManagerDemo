@@ -7,11 +7,11 @@
 
 import Foundation
 struct ContactModel : Decodable {
-    let id: Int?
-    let firstName : String?
-    let lastName : String?
-    let photoUrl : String?
-    let email : String?
+    var id: Int?
+    var firstName : String?
+    var lastName : String?
+    var photoUrl : String?
+    var email : String?
     
     init(firstName : String? , lastName : String?, photoURL : String?, email : String?,_ id : Int? = 0) {
         self.firstName  = firstName

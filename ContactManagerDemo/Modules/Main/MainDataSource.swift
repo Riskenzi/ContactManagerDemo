@@ -54,7 +54,7 @@ class MainDataSource: NSObject {
                     switch result {
                     case .success(let contacts):
                         contacts.results?.forEach({ (contact) in
-                            guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.thumbnail, let email = contact.email else {
+                            guard let fName = contact.name?.first , let lName = contact.name?.last, let photoUrl = contact.picture?.medium, let email = contact.email else {
                                 return
                             }
                             let newContact = ContactModel(firstName: fName, lastName: lName, photoURL: photoUrl, email: email)
