@@ -15,8 +15,6 @@ enum CellType {
     case lastName
 }
 
-
-
 struct DetailViewModel {
     
     // MARK: - Properties

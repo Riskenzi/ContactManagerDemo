@@ -88,7 +88,6 @@ class DetailDataSource: NSObject {
     
     @objc func returnMain() {
        _ = controller.navigationController?.popViewController(animated: true)
-       
     }
     
     
